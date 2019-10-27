@@ -110,4 +110,27 @@ class BookmarksController extends AppController
 
         return $this->redirect(['action' => 'index']);
     }
+
+## my
+
+public function tags()
+{
+    // Ключ 'pass' предоставляется CakePHP и содержит все
+    // передаваемые в URL сегменты пути в запросе.
+    $tags = $this->request->getParam('pass');
+
+    // Используем класс BookmarksTable для поиска закладок с тегами.
+    $bookmarks = $this->Bookmarks->find('tagged', [
+        'tags' => $tags
+    ]);
+
+    // Передаем переменные в Вид.
+    $this->set([
+        'bookmarks' => $bookmarks,
+        'tags' => $tags
+    ]);
+}
+
+
+
 }

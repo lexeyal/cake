@@ -1,6 +1,9 @@
 <?php
 namespace App\Model\Entity;
 
+## my
+use Cake\Auth\DefaultPasswordHasher; //добавьте эту строку
+
 use Cake\ORM\Entity;
 
 /**
@@ -41,4 +44,14 @@ class User extends Entity
     protected $_hidden = [
         'password'
     ];
+
+## my
+// Код от bake.
+
+    protected function _setPassword($value)
+    {
+        $hasher = new DefaultPasswordHasher();
+        return $hasher->hash($value);
+    }
+
 }
