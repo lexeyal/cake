@@ -103,4 +103,22 @@ class UsersController extends AppController
 
         return $this->redirect(['action' => 'index']);
     }
+
+## my
+	public function login(){
+        if ($this->request->is('post')) {
+            $user = $this->Auth->identify();
+            if ($user) {
+                $this->Auth->setUser($user);
+                return $this->redirect($this->Auth->redirectUrl());
+            }
+            $this->Flash->error('Ваше имя пользователя или пароль не верны.');
+        }
+    }
+
+    public function logout()
+    {
+        $this->Flash->success('Вы вышли из своей учетной записи.');
+        return $this->redirect($this->Auth->logout());
+    }
 }
